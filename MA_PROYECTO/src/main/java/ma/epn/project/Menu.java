@@ -12,6 +12,9 @@ public class Menu {
 
     public Menu(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public void generarListaAsistente(){
         opciones.add("0 Salir");
         opciones.add("1 Ingresar Cita");
         opciones.add("2 Eliminar Cita");
@@ -19,14 +22,39 @@ public class Menu {
     }
 
     public void mostrarOpciones() {
-        System.out.println("Seleccione el numero de la opcion que desee realizar: " + opciones);
+        String tipoUsuario = this.usuario.getTipo();
+        switch (tipoUsuario){
+            case "Gerente":
+                System.out.println("Proximamente Gerente");
+                System.exit(0);
+                break;
+            case "Peluquero":
+                System.out.println("Proximamente Peluquero");
+                System.exit(0);
+                break;
+            case "Asistente":
+                if(opciones.isEmpty()){
+                    generarListaAsistente();
+                }
+                System.out.println("Seleccione el numero de la opcion que desee realizar: " + opciones);
+                break;
+            default:
+                System.out.println("No es un tipo de usuario valido");
+                System.exit(0);
+        }
+
     }
 
     public void escogerOpcion() {
         do {
             mostrarOpciones();
-            Scanner input = new Scanner(System.in);
-            eleccion = input.nextInt();
+            Scanner inputEleccion = new Scanner(System.in);
+            try {
+                eleccion = inputEleccion.nextInt();
+            }catch (Exception e){
+                System.out.println("Esa no es una opcion valida");
+                System.exit(0);
+            }
             switch (eleccion) {
                 case 0:
                     System.out.println("Muchas gracias por usar este programa");
@@ -37,43 +65,35 @@ public class Menu {
                     temp1.reservar();
                     if (citas.isEmpty()) {
                         citas.add(temp1);
-                        temp2 = 1;
                         System.out.println("Cita agendada");
-                        break;
+                        System.out.println(citas.toString());
                     } else {
-                        for (Cita cit : citas) {
-                            if (!cit.getNumCedula().equals(temp1.getNumCedula()) && !cit.getFechaCompleta().equals(temp1.getFechaCompleta())) {
-                                temp2 = 1;
-                                break;
-                            } else if (cit.getFechaCompleta().equals(temp1.getFechaCompleta()) && cit.getNumCedula().equals(temp1.getNumCedula())) {
-                                temp2 = 1;
-                                break;
-                            } else if (cit.getNumCedula().equals(temp1.getNumCedula()) && !cit.getFechaCompleta().equals(temp1.getFechaCompleta())) {
-                                temp2 = 1;
+                        for (int i = 0; i <citas.size(); i++) {
+                            if(citas.get(i).getFechaCompleta().equals(temp1.getFechaCompleta())) {
+                                temp2 = 2;
                                 break;
                             } else {
-                                System.out.println(cit.getNumCedula().equals(temp1.getNumCedula()) + "" + cit.getFechaCompleta().equals(temp1.getFechaCompleta()));
-                                break;
+                                temp2 = 1;
                             }
+
                         }
-                        if (temp2 == 0) {
+                        if(temp2 == 2){
                             System.out.println("fecha no disponible");
-                            break;
-                        } else {
+                        }else if (temp2 == 1) {
                             citas.add(temp1);
                             System.out.println("Cita agendada");
-                            break;
+                            System.out.println(citas.toString());
                         }
                     }
+                    break;
                 case 2:
-                    int temp3 = 0;
-                    Cita temp4 = new Cita();
-                    temp4.eliminar();
-                    int temp5 = 0;
                     if (citas.isEmpty()) {
                         System.out.println("No existen citas");
-                        break;
                     } else {
+                        int temp3 = 0;
+                        Cita temp4 = new Cita();
+                        temp4.eliminar();
+                        int temp5 = 0;
                         String confirmacion = "n";
                         for (int i = 0; i <citas.size(); i++) {
                             if (citas.get(i).getFechaCompleta().equals(temp4.getFechaCompleta())) {
@@ -102,37 +122,53 @@ public class Menu {
                             System.out.println("cita no existente");
                             break;
                         }
-                        break;
                     }
+                    break;
 
                 case 3:
-                    int temp6 = 0;
-                    while (temp6 == 0) {
+                    if (citas.isEmpty()) {
+                        System.out.println("No existen citas");
+                    } else {
+                        int temp6 = 0;
                         Cita temp7 = new Cita();
                         temp7.actualizar();
-                        for (Cita cit : citas) {
-                            if (cit.getFechaCompleta().equals(temp7.getFechaCompleta())) {
-                                String nuevaFecha;
-                                Scanner inputNuevaFecha = new Scanner(System.in);
-                                System.out.println("Ingrese nueva fecha y hora: ");
-                                nuevaFecha = inputNuevaFecha.nextLine();
-                                for (Cita cit2 : citas) {
-                                    if (!cit2.getFechaCompleta().equals(nuevaFecha)) {
-                                        temp6 = 1;
-                                        break;
-                                    }
-                                }
-                                if (temp6 == 1) {
-                                    citas.add(temp7);
-                                } else if (temp6 == 0) {
-                                    System.out.println("Fecha no disponible");
+                        int temp8 = 0;
+                        for (int i = 0; i <citas.size(); i++) {
+                            if (citas.get(i).getFechaCompleta().equals(temp7.getFechaCompleta())) {
+                                temp6 = 2;
+                                temp8 = i;
+                                break;
+                            }
+                            else{
+                                temp6 = 1;
+                            }
+                        }
+                        if (temp6 == 2) {
+                            String nuevaFecha;
+                            Scanner inputNuevaFecha = new Scanner(System.in);
+                            System.out.println("Ingrese nueva fecha y hora: ");
+                            nuevaFecha = inputNuevaFecha.nextLine();
+                            String numCedula = citas.get(temp8).getNumCedula();
+                            temp7.setFechaCompleta(nuevaFecha);
+                            temp7.setNumCedula(numCedula);
+                            for (int j = 0; j < citas.size(); j++) {
+                                if (citas.get(j).getFechaCompleta().equals(nuevaFecha)) {
+                                    temp6 = 2;
+                                    break;
+                                } else {
+                                    temp6 = 3;
                                 }
                             }
                         }
-                        if (temp6 == 0) {
-                            System.out.println("cita no existente");
+                        if (temp6 == 3) {
+                            citas.remove(temp8);
+                            citas.add(temp7);
+                            System.out.println("Cita actualizada");
+                        } else if (temp6 == 2) {
+                            System.out.println("Fecha no disponible");
                         }
                     }
+                    break;
                 default:
                     System.out.println("Esa no es una opcion valida");
                     break;
