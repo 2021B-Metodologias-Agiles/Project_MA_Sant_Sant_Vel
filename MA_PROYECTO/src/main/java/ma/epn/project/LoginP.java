@@ -36,20 +36,8 @@ public class LoginP {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public ArrayList<Usuario> getUsuarios() {
-        return usuarios;
     }
 
     public void setUsuarios(ArrayList<Usuario> usuarios) {
@@ -58,9 +46,5 @@ public class LoginP {
 
     public Usuario getUsuarioLogeado() {
         return usuarioLogeado;
-    }
-
-    public void setUsuarioLogeado(Usuario usuarioLogeado) {
-        this.usuarioLogeado = usuarioLogeado;
     }
 }
