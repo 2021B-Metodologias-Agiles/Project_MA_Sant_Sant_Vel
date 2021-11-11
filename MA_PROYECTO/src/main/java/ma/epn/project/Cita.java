@@ -4,7 +4,6 @@ https://lucid.app/lucidchart/a365ba40-b746-4b8f-bea4-647a4f56f84c/edit?viewport_
 */
 package main.java.ma.epn.project;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,9 +16,11 @@ public class Cita {
         System.out.println("Ingresar la fecha completa: ");
         System.out.println("(dd/MM/yyyy hh:mm)");
         this.fechaCompleta = inputfechaCompleta.nextLine();
+        validarFechaCompleta();
         Scanner inputNumCedula = new Scanner(System.in);
         System.out.println("Ingresar numero de cedula: ");
         this.numCedula = inputNumCedula.nextLine();
+        validarCedula();
         int temp2 = 0;
         Cita temp1 = new Cita();
         temp1.setFechaCompleta(fechaCompleta);
@@ -72,11 +73,11 @@ public class Cita {
             Scanner inputConfirmacion = new Scanner(System.in);
             System.out.println("¿Está serguro que desea eliminar la cita?(s/n) ");
             confirmacion = inputConfirmacion.nextLine();
-            if (confirmacion.equals("s")) {
+            if (confirmacion.equals("s") || confirmacion.equals("S") || confirmacion.equals("si") || confirmacion.equals("Si") || confirmacion.equals("SI")) {
                 citas.remove(temp5);
                 System.out.println("cita eliminada");
                 return citas;
-            }else if (confirmacion.equals("n")){
+            }else if (confirmacion.equals("n") || confirmacion.equals("N") || confirmacion.equals("no") || confirmacion.equals("No") || confirmacion.equals("NO")){
                 System.out.println("cita no eliminada");
                 return citas;
             }else{
@@ -137,6 +138,14 @@ public class Cita {
             return citas;
         }
         return citas;
+    }
+
+    public void validarFechaCompleta(){
+
+    }
+
+    public void validarCedula(){
+
     }
 
     public String getFechaCompleta() {
