@@ -18,10 +18,10 @@ public class Menu {
     }
 
     public void generarListaAsistente(){
-        opciones.add("0 Salir");
-        opciones.add("1 Ingresar Cita");
-        opciones.add("2 Eliminar Cita");
-        opciones.add("3 Modificar Cita");
+        opciones.add("0. Salir");
+        opciones.add("1. Ingresar Cita");
+        opciones.add("2. Eliminar Cita");
+        opciones.add("3. Modificar Cita");
     }
 
     public void mostrarOpciones() {
@@ -39,7 +39,7 @@ public class Menu {
                 if(opciones.isEmpty()){
                     generarListaAsistente();
                 }
-                System.out.println("Seleccione el numero de la opcion que desee realizar: " + opciones);
+                System.out.print(this);
                 break;
             default:
                 System.out.println("No es un tipo de usuario valido");
@@ -60,7 +60,7 @@ public class Menu {
             }
             switch (eleccion) {
                 case 0:
-                    System.out.println("Muchas gracias por usar este programa");
+                    System.out.println("\n¡Muchas gracias por usar este programa!");
                     System.exit(0);
                 case 1:
                     Cita temp1 = new Cita();
@@ -91,4 +91,12 @@ public class Menu {
         }while(eleccion!=0);
     }
 
+    @Override
+    public String toString() {
+        System.out.println("\tMenú Principal");
+        for(String opcion: opciones){
+            System.out.println(opcion);
+        }
+        return "Seleccione el numero de la opcion que desee realizar: ";
+    }
 }

@@ -15,10 +15,10 @@ public class LoginP {
 
     public void obtenerLogin(){
         Scanner inputUsername = new Scanner(System.in);
-        System.out.println("Ingresar usuario: ");
+        System.out.print("Ingresar usuario: ");
         username = inputUsername.nextLine();
         Scanner inputPassword = new Scanner(System.in);
-        System.out.println("Ingresar contraseña: ");
+        System.out.print("Ingresar contraseña: ");
         password = inputPassword.nextLine();
     }
 
