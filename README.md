@@ -1,6 +1,6 @@
 # AGILE METHODOLOGIES PROJECT
 
-## _Team Not_Found_
+## _Team 4-Not_Found_
 
 Final Project Agile Methodologies
 This repo is for the member of team Not_Found.
@@ -11,7 +11,7 @@ This repo is for the member of team Not_Found.
 
 ## Tech
 
-Team Asia uses a number of technologies to work properly:
+Team 4-Not_Found_ uses a number of technologies to work properly:
 
 - [JavaJDK17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) - Coding languaje selected
 - [IntelliJ IDEA Ultimate](https://www.jetbrains.com/idea/download/#section=windows) - IDE for Java development

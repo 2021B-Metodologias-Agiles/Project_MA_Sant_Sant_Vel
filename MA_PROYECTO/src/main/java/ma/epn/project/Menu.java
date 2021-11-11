@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 public class Menu {
     public ArrayList<String> opciones = new ArrayList<>();
-
     private Usuario usuario;
     private ArrayList<Cita> citas = new ArrayList<>();
     private int eleccion;
