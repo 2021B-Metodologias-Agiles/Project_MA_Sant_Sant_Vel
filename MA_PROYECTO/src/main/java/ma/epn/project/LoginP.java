@@ -22,7 +22,7 @@ public class LoginP {
         obtenerLogin();
         int temp1 = 0;
         for(Usuario usr : usuarios){
-            if(usr.getUsername().equals(getUsername())){
+            if(usr.getUsername().equals(getUsername()) && usr.getPassword().equals(getPassword())){
                 usuarioLogeado = usr;
                 temp1 = 1;
                 break;

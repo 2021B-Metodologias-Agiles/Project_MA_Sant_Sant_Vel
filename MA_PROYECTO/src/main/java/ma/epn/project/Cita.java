@@ -43,4 +43,12 @@ public class Cita {
     public void setNumCedula(String numCedula) {
         this.numCedula = numCedula;
     }
+
+    @Override
+    public String toString() {
+        return "Cita{" +
+                "fechaCompleta='" + fechaCompleta + '\'' +
+                ", numCedula='" + numCedula + '\'' +
+                '}';
+    }
 }
