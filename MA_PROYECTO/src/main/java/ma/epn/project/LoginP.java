@@ -1,3 +1,7 @@
+/*
+Class diagram link:
+https://lucid.app/lucidchart/a365ba40-b746-4b8f-bea4-647a4f56f84c/edit?viewport_loc=407%2C-68%2C2389%2C1075%2C0_0&invitationId=inv_82ade4c6-f5e7-400f-b2aa-a0b7def313e2
+*/
 package main.java.ma.epn.project;
 
 import java.util.ArrayList;
@@ -36,20 +40,8 @@ public class LoginP {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public ArrayList<Usuario> getUsuarios() {
-        return usuarios;
     }
 
     public void setUsuarios(ArrayList<Usuario> usuarios) {
@@ -58,9 +50,5 @@ public class LoginP {
 
     public Usuario getUsuarioLogeado() {
         return usuarioLogeado;
-    }
-
-    public void setUsuarioLogeado(Usuario usuarioLogeado) {
-        this.usuarioLogeado = usuarioLogeado;
     }
 }
