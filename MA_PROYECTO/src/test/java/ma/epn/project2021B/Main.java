@@ -7,7 +7,6 @@ package test.java.ma.epn.project2021B;
 import main.java.ma.epn.project2021B.LoginP;
 import main.java.ma.epn.project2021B.Menu;
 import main.java.ma.epn.project2021B.Usuario;
-
 import java.util.ArrayList;
 
 public class Main {
@@ -16,7 +15,7 @@ public class Main {
         LoginP loginP = new LoginP();
         loginP.setUsuarios(usuarios());
         loginP.completarLogin();
-        Menu menu = new Menu(loginP.getUsuarioLogeado());
+        Menu menu = new Menu(loginP.getUsuarioActual());
         menu.escogerOpcion();
     }
     static ArrayList<Usuario> usuarios(){
