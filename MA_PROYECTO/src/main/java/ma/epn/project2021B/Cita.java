@@ -24,13 +24,13 @@ public class Cita {
             }
             System.out.println("\nFecha inválida");
         }
-        Scanner inputNumCedula = new Scanner(System.in);
+        Scanner inputCI = new Scanner(System.in);
         int disponibilidad = -1;
         Cita citaTemp = new Cita();
 
         if (citas.isEmpty()) {
-            System.out.print("Ingresar numero de cédula del cliente: ");
-            this.numCedula = inputNumCedula.nextLine();
+            System.out.print("Ingresar número de cédula del cliente: ");
+            this.numCedula = inputCI.nextLine();
             citaTemp.setFechaCompleta(fechaCompleta);
             citaTemp.setNumCedula(numCedula);
             citas.add(citaTemp);
@@ -50,8 +50,8 @@ public class Cita {
                 System.out.println("\nFecha no disponible\n");
                 reservar(citas);
             }else {
-                System.out.print("Ingresar numero de cedula: ");
-                this.numCedula = inputNumCedula.nextLine();
+                System.out.print("Ingresar número de cédula: ");
+                this.numCedula = inputCI.nextLine();
                 citaTemp.setFechaCompleta(fechaCompleta);
                 citaTemp.setNumCedula(numCedula);
                 citas.add(citaTemp);

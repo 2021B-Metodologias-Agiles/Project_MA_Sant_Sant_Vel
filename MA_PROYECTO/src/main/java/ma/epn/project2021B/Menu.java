@@ -98,6 +98,6 @@ public class Menu {
         for(String opcion: opciones){
             System.out.println(opcion);
         }
-        return "Seleccione el numero de la opción que desee realizar: ";
+        return "Seleccione el número de la opción que desee realizar: ";
     }
 }
