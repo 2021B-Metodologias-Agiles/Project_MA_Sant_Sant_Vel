@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Main" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="test.java.ma.epn.project.Main" />
+    <option name="MAIN_CLASS_NAME" value="test.java.ma.epn.project2021B.Main" />
     <module name="MA_PROYECTO" />
     <RunnerSettings RunnerId="Run" />
     <ConfigurationWrapper RunnerId="Run" />

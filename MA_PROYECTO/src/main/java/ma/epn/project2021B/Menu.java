@@ -2,7 +2,7 @@
 Class diagram link:
 https://lucid.app/lucidchart/a365ba40-b746-4b8f-bea4-647a4f56f84c/edit?viewport_loc=407%2C-68%2C2389%2C1075%2C0_0&invitationId=inv_82ade4c6-f5e7-400f-b2aa-a0b7def313e2
 */
-package main.java.ma.epn.project;
+package main.java.ma.epn.project2021B;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -18,10 +18,10 @@ public class Menu {
     }
 
     public void generarListaAsistente(){
-        opciones.add("0 Salir");
-        opciones.add("1 Ingresar Cita");
-        opciones.add("2 Eliminar Cita");
-        opciones.add("3 Modificar Cita");
+        opciones.add("0. Salir");
+        opciones.add("1. Ingresar Cita");
+        opciones.add("2. Eliminar Cita");
+        opciones.add("3. Modificar Cita");
     }
 
     public void mostrarOpciones() {
@@ -39,7 +39,7 @@ public class Menu {
                 if(opciones.isEmpty()){
                     generarListaAsistente();
                 }
-                System.out.println("Seleccione el numero de la opcion que desee realizar: " + opciones);
+                System.out.print(this);
                 break;
             default:
                 System.out.println("No es un tipo de usuario valido");
@@ -60,7 +60,7 @@ public class Menu {
             }
             switch (eleccion) {
                 case 0:
-                    System.out.println("Muchas gracias por usar este programa");
+                    System.out.println("\n¡Muchas gracias por usar este programa!");
                     System.exit(0);
                 case 1:
                     Cita temp1 = new Cita();
@@ -91,4 +91,12 @@ public class Menu {
         }while(eleccion!=0);
     }
 
+    @Override
+    public String toString() {
+        System.out.println("\tMenú Principal");
+        for(String opcion: opciones){
+            System.out.println(opcion);
+        }
+        return "Seleccione el numero de la opcion que desee realizar: ";
+    }
 }

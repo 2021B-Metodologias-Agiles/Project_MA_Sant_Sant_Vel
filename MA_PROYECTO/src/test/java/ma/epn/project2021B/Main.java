@@ -2,13 +2,12 @@
 Class diagram link:
 https://lucid.app/lucidchart/a365ba40-b746-4b8f-bea4-647a4f56f84c/edit?viewport_loc=407%2C-68%2C2389%2C1075%2C0_0&invitationId=inv_82ade4c6-f5e7-400f-b2aa-a0b7def313e2
 */
-package test.java.ma.epn.project;
+package test.java.ma.epn.project2021B;
 
-import main.java.ma.epn.project.LoginP;
-import main.java.ma.epn.project.Menu;
-import main.java.ma.epn.project.Usuario;
+import main.java.ma.epn.project2021B.LoginP;
+import main.java.ma.epn.project2021B.Menu;
+import main.java.ma.epn.project2021B.Usuario;
 
-import java.sql.Array;
 import java.util.ArrayList;
 
 public class Main {

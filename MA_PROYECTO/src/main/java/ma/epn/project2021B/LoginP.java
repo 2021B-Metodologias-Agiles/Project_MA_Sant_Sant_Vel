@@ -2,7 +2,7 @@
 Class diagram link:
 https://lucid.app/lucidchart/a365ba40-b746-4b8f-bea4-647a4f56f84c/edit?viewport_loc=407%2C-68%2C2389%2C1075%2C0_0&invitationId=inv_82ade4c6-f5e7-400f-b2aa-a0b7def313e2
 */
-package main.java.ma.epn.project;
+package main.java.ma.epn.project2021B;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,10 +15,10 @@ public class LoginP {
 
     public void obtenerLogin(){
         Scanner inputUsername = new Scanner(System.in);
-        System.out.println("Ingresar usuario: ");
+        System.out.print("Ingresar usuario: ");
         username = inputUsername.nextLine();
         Scanner inputPassword = new Scanner(System.in);
-        System.out.println("Ingresar contraseña: ");
+        System.out.print("Ingresar contraseña: ");
         password = inputPassword.nextLine();
     }
 
