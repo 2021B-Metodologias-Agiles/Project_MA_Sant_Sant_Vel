@@ -11,7 +11,7 @@ public class LoginP {
     private String username;
     private String password;
     private ArrayList<Usuario> usuarios;
-    private Usuario usuarioLogeado;
+    private Usuario usuarioActual;
 
     public void obtenerLogin(){
         Scanner inputUsername = new Scanner(System.in);
@@ -27,10 +27,10 @@ public class LoginP {
         int temp1 = 0;
         for(Usuario usr : usuarios){
             if(usr.getUsername().equals(getUsername()) && usr.getPassword().equals(getPassword())){
-                usuarioLogeado = usr;
+                usuarioActual = usr;
                 temp1 = 1;
                 break;
-            }else{}
+            }
         }if(temp1 == 0){
             completarLogin();
         }
@@ -48,7 +48,7 @@ public class LoginP {
         this.usuarios = usuarios;
     }
 
-    public Usuario getUsuarioLogeado() {
-        return usuarioLogeado;
+    public Usuario getUsuarioActual() {
+        return usuarioActual;
     }
 }

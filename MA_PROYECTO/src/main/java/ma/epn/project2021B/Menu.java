@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Menu {
     public ArrayList<String> opciones = new ArrayList<>();
-    private Usuario usuario;
+    private final Usuario usuario;
     private ArrayList<Cita> citas = new ArrayList<>();
     private int eleccion;
 
@@ -26,24 +26,25 @@ public class Menu {
 
     public void mostrarOpciones() {
         String tipoUsuario = this.usuario.getTipo();
-        switch (tipoUsuario){
-            case "Gerente":
-                System.out.println("Proximamente Gerente");
+        switch (tipoUsuario) {
+            case "Gerente" -> {
+                System.out.println("Próximamente Gerente");
                 System.exit(0);
-                break;
-            case "Peluquero":
-                System.out.println("Proximamente Peluquero");
+            }
+            case "Peluquero" -> {
+                System.out.println("Próximamente Peluquero");
                 System.exit(0);
-                break;
-            case "Asistente":
-                if(opciones.isEmpty()){
+            }
+            case "Asistente" -> {
+                if (opciones.isEmpty()) {
                     generarListaAsistente();
                 }
                 System.out.print(this);
-                break;
-            default:
+            }
+            default -> {
                 System.out.println("No es un tipo de usuario valido");
                 System.exit(0);
+            }
         }
 
     }
@@ -55,7 +56,7 @@ public class Menu {
             try {
                 eleccion = inputEleccion.nextInt();
             }catch (Exception e){
-                System.out.println("Esa no es una opcion valida");
+                System.out.println("Esa no es una opción valida");
                 System.exit(0);
             }
             switch (eleccion) {
@@ -85,7 +86,7 @@ public class Menu {
                     }
                     break;
                 default:
-                    System.out.println("Esa no es una opcion valida");
+                    System.out.println("Esa no es una opción valida");
                     break;
             }
         }while(eleccion!=0);
@@ -97,6 +98,6 @@ public class Menu {
         for(String opcion: opciones){
             System.out.println(opcion);
         }
-        return "Seleccione el numero de la opcion que desee realizar: ";
+        return "Seleccione el numero de la opción que desee realizar: ";
     }
 }
