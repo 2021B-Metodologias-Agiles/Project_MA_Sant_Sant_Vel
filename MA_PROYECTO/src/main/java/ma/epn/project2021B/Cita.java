@@ -2,7 +2,7 @@
 Class diagram link:
 https://lucid.app/lucidchart/a365ba40-b746-4b8f-bea4-647a4f56f84c/edit?viewport_loc=407%2C-68%2C2389%2C1075%2C0_0&invitationId=inv_82ade4c6-f5e7-400f-b2aa-a0b7def313e2
 */
-package main.java.ma.epn.project;
+package main.java.ma.epn.project2021B;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -35,8 +35,7 @@ public class Cita {
             citaTemp.setNumCedula(numCedula);
             citas.add(citaTemp);
             System.out.println("\nCita agendada\n");
-            System.out.println(citas.toString());
-            return citas;
+            System.out.println(citas);
         } else {
             for (Cita cita : citas) {
                 if (cita.getFechaCompleta().equals(this.fechaCompleta)) {
@@ -50,7 +49,7 @@ public class Cita {
             if(disponibilidad == EstadoFecha.FECHA_OCUPADA.ordinal()){
                 System.out.println("\nFecha no disponible\n");
                 reservar(citas);
-            }else if (disponibilidad == EstadoFecha.FECHA_LIBRE.ordinal()) {
+            }else {
                 System.out.print("Ingresar numero de cedula: ");
                 this.numCedula = inputNumCedula.nextLine();
                 citaTemp.setFechaCompleta(fechaCompleta);
@@ -60,8 +59,8 @@ public class Cita {
                 System.out.println(citas);
                 return citas;
             }
-            return citas;
         }
+        return citas;
     }
 
     public ArrayList<Cita> eliminar(ArrayList<Cita> citas){
@@ -72,7 +71,7 @@ public class Cita {
         Cita citaTemp = new Cita();
         citaTemp.setFechaCompleta(fechaCompleta);
         int citaElegida = 0;
-        String confirmacion = "n";
+        String confirmacion;
         for (int i = 0; i <citas.size(); i++) {
             if (citas.get(i).getFechaCompleta().equals(citaTemp.getFechaCompleta())) {
                 existencia = EstadoFecha.FECHA_OCUPADA.ordinal();
@@ -81,7 +80,7 @@ public class Cita {
         }
         if(existencia == EstadoFecha.FECHA_OCUPADA.ordinal()){
             Scanner inputConfirmacion = new Scanner(System.in);
-            System.out.println("¿Está serguro que desea eliminar la cita?(s/n) ");
+            System.out.println("¿Está seguro que desea eliminar la cita?(s/n) ");
             confirmacion = inputConfirmacion.nextLine();
             if (confirmacion.equals("s") || confirmacion.equals("S") || confirmacion.equals("si") || confirmacion.equals("Si") || confirmacion.equals("SI")) {
                 citas.remove(citaElegida);
@@ -91,7 +90,7 @@ public class Cita {
                 System.out.println("\nCita no eliminada\n");
                 return citas;
             }else{
-                System.out.println("No es una opcion valida");
+                System.out.println("No es una opción valida");
                 return citas;
             }
         }
