@@ -15,8 +15,39 @@ public class Cita {
     private String fechaCompleta;
     private String numCedula;
 
-    public ArrayList<Cita> reservar(ArrayList<Cita> citas){
+    public Cita(){}
 
+    public Cita (String fechaCompleta, String numCedula){
+        this.fechaCompleta = fechaCompleta;
+        this.numCedula = numCedula;
+    }
+
+    public ArrayList<Cita> reservar(ArrayList<Cita> citas){
+        getFechaCorrecta();
+        int disponibilidad = -1;
+        if (citas.isEmpty()) {
+            setCitaAgendada(citas);
+        } else {
+            for (Cita cita : citas) {
+                if (cita.getFechaCompleta().equals(this.fechaCompleta)) {
+                    disponibilidad = EstadoFecha.FECHA_OCUPADA.ordinal();
+                    break;
+                } else {
+                    disponibilidad = EstadoFecha.FECHA_LIBRE.ordinal();
+                }
+            }
+            if(disponibilidad == EstadoFecha.FECHA_OCUPADA.ordinal()){
+                System.out.println("\nFecha no disponible\n");
+                reservar(citas);
+            }else {
+                setCitaAgendada(citas);
+                return citas;
+            }
+        }
+        return citas;
+    }
+
+    private void getFechaCorrecta() {
         while(true){
             Scanner inputfechaCompleta = new Scanner(System.in);
             System.out.print("Ingresar la fecha completa (dd/MM/yyyy hh:mm): ");
@@ -26,43 +57,15 @@ public class Cita {
             }
             System.out.println("\nFecha inválida");
         }
+    }
+
+    private void setCitaAgendada(ArrayList<Cita> citas) {
         Scanner inputCI = new Scanner(System.in);
-        int disponibilidad = -1;
-        Cita citaTemp = new Cita();
-
-        if (citas.isEmpty()) {
-            System.out.print("Ingresar número de cédula del cliente: ");
-            this.numCedula = inputCI.nextLine();
-            citaTemp.setFechaCompleta(fechaCompleta);
-            citaTemp.setNumCedula(numCedula);
-            citas.add(citaTemp);
-            System.out.println("\nCita agendada\n");
-            System.out.println(citas);
-        } else {
-            for (Cita cita : citas) {
-                if (cita.getFechaCompleta().equals(this.fechaCompleta)) {
-                    disponibilidad = EstadoFecha.FECHA_OCUPADA.ordinal();
-                    break;
-                } else {
-                    disponibilidad = EstadoFecha.FECHA_LIBRE.ordinal();
-                }
-
-            }
-            if(disponibilidad == EstadoFecha.FECHA_OCUPADA.ordinal()){
-                System.out.println("\nFecha no disponible\n");
-                reservar(citas);
-            }else {
-                System.out.print("Ingresar número de cédula: ");
-                this.numCedula = inputCI.nextLine();
-                citaTemp.setFechaCompleta(fechaCompleta);
-                citaTemp.setNumCedula(numCedula);
-                citas.add(citaTemp);
-                System.out.println("\nCita agendada\n");
-                System.out.println(citas);
-                return citas;
-            }
-        }
-        return citas;
+        System.out.print("Ingresar número de cédula del cliente: ");
+        this.numCedula = inputCI.nextLine();
+        citas.add(new Cita(fechaCompleta, numCedula));
+        System.out.println("\nCita agendada\n");
+        System.out.println(citas);
     }
 
     public ArrayList<Cita> eliminar(ArrayList<Cita> citas){
