@@ -61,37 +61,42 @@ public class Menu {
                 System.out.println("Esa no es una opción valida");
                 System.exit(0);
             }
-            switch (eleccion) {
-                case 0:
-                    System.out.println("\n¡Muchas gracias por usar este programa!");
-                    System.exit(0);
-                case 1:
-                    Cita temp1 = new Cita();
-                    citas = temp1.reservar(citas);
-                    break;
-                case 2:
-                    if (citas.isEmpty()) {
-                        System.out.println("No existen citas");
-                    } else {
-                        Cita temp4 = new Cita();
-                        citas = temp4.eliminar(citas);
-                        break;
-                    }
-                    break;
-                case 3:
-                    if (citas.isEmpty()) {
-                        System.out.println("No existen citas");
-                    } else {
-                        Cita temp7 = new Cita();
-                        citas = temp7.actualizar(citas);
-                        break;
-                    }
-                    break;
-                default:
-                    System.out.println("Esa no es una opción valida");
-                    break;
-            }
+            developOption();
         }while(eleccion!=0);
+    }
+
+    private void developOption() {
+        //determina las acciones de la eleccion.
+        switch (eleccion) {
+            case 0:
+                System.out.println("\n¡Muchas gracias por usar este programa!");
+                System.exit(0);
+            case 1:
+                Cita temp1 = new Cita();
+                citas = temp1.reservar(citas);
+                break;
+            case 2:
+                if (citas.isEmpty()) {
+                    System.out.println("No existen citas");
+                } else {
+                    Cita temp4 = new Cita();
+                    citas = temp4.eliminar(citas);
+                    break;
+                }
+                break;
+            case 3:
+                if (citas.isEmpty()) {
+                    System.out.println("No existen citas");
+                } else {
+                    Cita temp7 = new Cita();
+                    citas = temp7.actualizar(citas);
+                    break;
+                }
+                break;
+            default:
+                System.out.println("Esa no es una opción valida");
+                break;
+        }
     }
 
     @Override
@@ -102,4 +107,5 @@ public class Menu {
         }
         return "Seleccione el número de la opción que desee realizar: ";
     }
+
 }
