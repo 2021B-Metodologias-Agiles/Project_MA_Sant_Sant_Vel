@@ -73,37 +73,46 @@ public class Cita {
         System.out.print("Ingresar la fecha completa (dd/MM/yyyy hh:mm): ");
         this.fechaCompleta = inputfechaCompleta.nextLine();
         int existencia = -1;
-        Cita citaTemp = new Cita();
-        citaTemp.setFechaCompleta(fechaCompleta);
         int citaElegida = 0;
-        String confirmacion;
         for (int i = 0; i <citas.size(); i++) {
-            if (citas.get(i).getFechaCompleta().equals(citaTemp.getFechaCompleta())) {
+            if (citas.get(i).getFechaCompleta().equals(this.fechaCompleta)) {
                 existencia = EstadoFecha.FECHA_OCUPADA.ordinal();
                 citaElegida = i;
             }
         }
         if(existencia == EstadoFecha.FECHA_OCUPADA.ordinal()){
-            Scanner inputConfirmacion = new Scanner(System.in);
-            System.out.println("¿Está seguro que desea eliminar la cita?(s/n) ");
-            confirmacion = inputConfirmacion.nextLine();
-            if (confirmacion.equals("s") || confirmacion.equals("S") || confirmacion.equals("si") || confirmacion.equals("Si") || confirmacion.equals("SI")) {
+            if(solicitarConfimacion()){
                 citas.remove(citaElegida);
                 System.out.println("\nCita eliminada\n");
-                return citas;
-            }else if (confirmacion.equals("n") || confirmacion.equals("N") || confirmacion.equals("no") || confirmacion.equals("No") || confirmacion.equals("NO")){
-                System.out.println("\nCita no eliminada\n");
-                return citas;
             }else{
-                System.out.println("No es una opción valida");
-                return citas;
+                System.out.println("\nCita no eliminada\n");
             }
+            return citas;
         }
         if (existencia == -1) {
             System.out.println("\nCita no existente\n");
             eliminar(citas);
         }
         return citas;
+    }
+
+    private boolean solicitarConfimacion() {
+        String confirmacion;
+        Scanner inputConfirmacion = new Scanner(System.in);
+        System.out.println("¿Está seguro que desea eliminar la cita?(s/n) ");
+        confirmacion = inputConfirmacion.nextLine();
+        boolean esS = confirmacion.equalsIgnoreCase("s");
+        boolean esSi = confirmacion.equalsIgnoreCase("Si");
+        boolean esN = confirmacion.equalsIgnoreCase("n");
+        boolean esNo = confirmacion.equalsIgnoreCase("No");
+        if (esS || esSi) {
+            return true;
+        }else if (esN || esNo){
+            return false;
+        }else{
+            System.out.println("No es una opción valida");
+            return solicitarConfimacion();
+        }
     }
 
     public ArrayList<Cita> actualizar(ArrayList<Cita> citas){
@@ -166,7 +175,7 @@ public class Cita {
     }
 
     public boolean validarFechaCompleta(String fecha){
-        Pattern pat = Pattern.compile("[0-3]{1,2}/[0-2]{1,2}/[0-9]{4} [0-9]{1,2}:[0-9]{1,2}");
+        Pattern pat = Pattern.compile("[0-9]{1,2}/[0-2]{1,2}/[0-9]{4} [0-9]{1,2}:[0-9]{1,2}");
         Matcher mat = pat.matcher(fecha);
         return mat.matches();
     }
