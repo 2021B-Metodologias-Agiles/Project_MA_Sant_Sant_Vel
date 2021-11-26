@@ -7,6 +7,7 @@ public class Menu {
     public ArrayList<String> opciones = new ArrayList<>();
     private final Usuario usuario;
     private ArrayList<Cita> citas = new ArrayList<>();
+    private ArrayList<Producto> productos = new ArrayList<>();
     private int eleccion;
 
     public Menu(Usuario usuario) {
@@ -20,17 +21,26 @@ public class Menu {
         opciones.add("3. Modificar Cita");
     }
 
-    public void mostrarOpciones() {
+    public ArrayList<String> generarListaGerente(){
+        opciones.add("0. Salir");
+        opciones.add("1. Crear producto");
+        return opciones;
+    }
+
+
+    public boolean mostrarOpciones() {
         String tipoUsuario = this.usuario.getTipo();
         switch (tipoUsuario) {
             case "Gerente":
-                System.out.println("Próximamente Gerente");
-                System.exit(0);
+                if (opciones.isEmpty()) {
+                    generarListaGerente();
+                }
+                System.out.print(this);
                 break;
             case "Peluquero":
                 System.out.println("Próximamente Peluquero");
                 System.exit(0);
-                break;
+                return false;
             case "Asistente":
                 if (opciones.isEmpty()) {
                     generarListaAsistente();
@@ -40,25 +50,98 @@ public class Menu {
             default:
                 System.out.println("No es un tipo de usuario valido");
                 System.exit(0);
-                break;
+                return false;
             }
+            return true;
         }
 
     public void escogerOpcion() {
         do {
-            mostrarOpciones();
-            Scanner inputEleccion = new Scanner(System.in);
-            try {
-                eleccion = inputEleccion.nextInt();
-            }catch (Exception e){
-                System.out.println("Esa no es una opción valida");
-                System.exit(0);
+            if(mostrarOpciones()){
+                Scanner inputEleccion = new Scanner(System.in);
+                try {
+                    eleccion = inputEleccion.nextInt();
+                }catch (Exception e){
+                    System.out.println("Esa no es una opción valida");
+                    System.exit(0);
+                }
+
+                String tipoUsuario = this.usuario.getTipo();
+                switch (tipoUsuario) {
+                    case "Gerente":
+                        desarrollarOpcionesGerente();
+                        break;
+                    case "Peluquero":
+                        break;
+                    case "Asistente":
+                        desarrollarOpcionesAsistente();
+                        break;
+                    default:
+                        System.out.println("No es un tipo de usuario valido");
+                        System.exit(0);
+                        break;
+                }
             }
-            developOption();
         }while(eleccion!=0);
     }
 
-    private void developOption() {
+    private void desarrollarOpcionesGerente(){
+        //determina las acciones de la eleccion.
+        switch (eleccion) {
+            case 0:
+                System.out.println("\n¡Muchas gracias por usar este programa!");
+                System.exit(0);
+            case 1:
+                String[] datos = obtenerDatos();
+                if(this.revisarPrecio(datos) || !datos[2].contains(".")) {
+                    Producto nProducto = this.obtenerProducto(datos);
+                    Producto.crear(productos, nProducto);
+                    System.out.println("Producto ingresado");
+                }
+                break;
+            default:
+                System.out.println("Esa no es una opción valida");
+                break;
+        }
+    }
+
+    public String[] obtenerDatos(){
+        Scanner inputTipoProducto = new Scanner(System.in);
+        System.out.print("Ingresar el tipo de producto: ");
+        String tipoProducto = inputTipoProducto.nextLine();
+        Scanner inputDetalleProducto = new Scanner(System.in);
+        System.out.print("Ingresar detalle del producto: ");
+        String detalleProducto = inputDetalleProducto.nextLine();
+        Scanner inputPrecioProducto = new Scanner(System.in);
+        System.out.print("Ingresar el precio del producto: ");
+        String precioProducto = inputPrecioProducto.nextLine();
+        return new String[]{tipoProducto,detalleProducto,precioProducto};
+    }
+
+    public Producto obtenerProducto(String[] datos){
+        String tipo = datos[0];
+        String detalle = datos[1];
+        double precio = Double.parseDouble(datos[2]);
+        String nombre = tipo + " " + detalle;
+        return new Producto(nombre,precio);
+    }
+
+    public String[] validarObtenerDatos(String[] datos, boolean isPriceValid){
+        return new String[]{};
+    }
+
+    public boolean revisarPrecio(String[] datos){
+        String precioS = datos[2];
+        int length = precioS.length();
+        Character theDot = precioS.charAt(length - 3);
+        double precio = Double.parseDouble(datos[2]);
+        if(!theDot.equals('.')){
+            return false;
+        }
+        return !(precio < 0);
+    }
+
+    private void desarrollarOpcionesAsistente(){
         //determina las acciones de la eleccion.
         switch (eleccion) {
             case 0:
