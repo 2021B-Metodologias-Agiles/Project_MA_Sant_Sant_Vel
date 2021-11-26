@@ -92,13 +92,53 @@ public class Menu {
                 System.out.println("\n¡Muchas gracias por usar este programa!");
                 System.exit(0);
             case 1:
-                //Lo dejo en null para que cesar implemente el metodo para obtener los datos y crear el producto
-                Producto.crear(productos, null);
+                String[] datos = obtenerDatos();
+                if(this.revisarPrecio(datos) || !datos[2].contains(".")) {
+                    Producto nProducto = this.obtenerProducto(datos);
+                    Producto.crear(productos, nProducto);
+                    System.out.println("Producto ingresado");
+                }
                 break;
             default:
                 System.out.println("Esa no es una opción valida");
                 break;
         }
+    }
+
+    public String[] obtenerDatos(){
+        Scanner inputTipoProducto = new Scanner(System.in);
+        System.out.print("Ingresar el tipo de producto: ");
+        String tipoProducto = inputTipoProducto.nextLine();
+        Scanner inputDetalleProducto = new Scanner(System.in);
+        System.out.print("Ingresar detalle del producto: ");
+        String detalleProducto = inputDetalleProducto.nextLine();
+        Scanner inputPrecioProducto = new Scanner(System.in);
+        System.out.print("Ingresar el precio del producto: ");
+        String precioProducto = inputPrecioProducto.nextLine();
+        return new String[]{tipoProducto,detalleProducto,precioProducto};
+    }
+
+    public Producto obtenerProducto(String[] datos){
+        String tipo = datos[0];
+        String detalle = datos[1];
+        double precio = Double.parseDouble(datos[2]);
+        String nombre = tipo + " " + detalle;
+        return new Producto(nombre,precio);
+    }
+
+    public String[] validarObtenerDatos(String[] datos, boolean isPriceValid){
+        return new String[]{};
+    }
+
+    public boolean revisarPrecio(String[] datos){
+        String precioS = datos[2];
+        int length = precioS.length();
+        Character theDot = precioS.charAt(length - 3);
+        double precio = Double.parseDouble(datos[2]);
+        if(!theDot.equals('.')){
+            return false;
+        }
+        return !(precio < 0);
     }
 
     private void desarrollarOpcionesAsistente(){

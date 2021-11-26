@@ -28,4 +28,21 @@ public class MenuTest {
         assertTrue(miMenu.mostrarOpciones());
     }
 
+    @Test
+    public void given_product_data_when_create_product_then_return_product(){
+        Usuario gerente = new Usuario("us1", "pas1", "Maria", "Caseres","Gerente");
+        Menu miMenu = new Menu(gerente);
+        Producto expected = new Producto("Cepillo ABC",10.99);
+        Producto actual = miMenu.obtenerProducto(new String[]{"Cepillo","ABC","10.99"});
+        assertEquals(expected.toString(),actual.toString());
+    }
+
+    @Test
+    public void given_price_data_when_create_product_then_price_bool(){
+        Usuario gerente = new Usuario("us1", "pas1", "Maria", "Caseres","Gerente");
+        Menu miMenu = new Menu(gerente);
+        Boolean condition = miMenu.revisarPrecio(new String[]{"","","10.99"});
+        assertTrue(condition);
+    }
+
 }

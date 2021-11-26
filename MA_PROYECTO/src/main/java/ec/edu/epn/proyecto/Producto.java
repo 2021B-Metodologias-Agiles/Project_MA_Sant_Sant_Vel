@@ -43,7 +43,19 @@ public class Producto {
         return false;
     }
 
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "nombre='" + nombre + '\'' +
+                ", precio=" + precio +
+                '}';
+    }
+
     public String getNombre() {
         return nombre;
+    }
+
+    public double getPrecio() {
+        return precio;
     }
 }
