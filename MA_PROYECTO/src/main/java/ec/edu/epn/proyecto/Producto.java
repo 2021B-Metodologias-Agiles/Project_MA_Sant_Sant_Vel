@@ -18,17 +18,17 @@ public class Producto {
         boolean esProductoExistente = false;
         if(productos.isEmpty()){
             productos.add(producto);
+            System.out.println("Producto creado");
+            System.out.println(producto.toString());
         }else{
-            for (Producto productoExistente : productos) {
-                if(validarProductoExistente(productos, producto)){
-                    System.out.println("Ya existe un producto con este nombre");
-                    esProductoExistente = true;
-                    break;
-                }
+            if(validarProductoExistente(productos, producto)){
+                System.out.println("Ya existe un producto con este nombre");
+                esProductoExistente = true;
             }
-
             if(!esProductoExistente){
                 productos.add(producto);
+                System.out.println("Producto creado");
+                System.out.println(producto.toString());
             }
         }
         return productos;
@@ -45,9 +45,9 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto{" +
-                "nombre='" + nombre + '\'' +
-                ", precio=" + precio +
+        return "Producto: {" +
+                "nombre= " + nombre  +
+                ", precio= " + precio +
                 '}';
     }
 
