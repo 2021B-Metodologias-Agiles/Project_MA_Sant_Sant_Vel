@@ -90,13 +90,17 @@ public class Menu {
         switch (eleccion) {
             case 0:
                 System.out.println("\n¡Muchas gracias por usar este programa!");
+                createDividers();
                 System.exit(0);
             case 1:
                 String[] datos = obtenerDatos();
-                if(this.revisarPrecio(datos) || !datos[2].contains(".")) {
+                if(this.revisarPrecio(datos)) {
                     Producto nProducto = this.obtenerProducto(datos);
-                    Producto.crear(productos, nProducto);
-                    System.out.println("Producto ingresado");
+                    ArrayList<Producto> newProducts = Producto.crear(productos, nProducto);
+                    productos = newProducts;
+                }else{
+                    System.out.println("El precio ingresado tiene errores.");
+                    System.out.println("Producto no creado.");
                 }
                 break;
             default:
@@ -123,6 +127,7 @@ public class Menu {
         String detalle = datos[1];
         double precio = Double.parseDouble(datos[2]);
         String nombre = tipo + " " + detalle;
+        System.out.println(nombre);
         return new Producto(nombre,precio);
     }
 
@@ -133,12 +138,23 @@ public class Menu {
     public boolean revisarPrecio(String[] datos){
         String precioS = datos[2];
         int length = precioS.length();
-        Character theDot = precioS.charAt(length - 3);
-        double precio = Double.parseDouble(datos[2]);
-        if(!theDot.equals('.')){
+        double precio = 0.00;
+        try {
+            precio = Double.parseDouble(datos[2]);
+        }catch (Exception e){
+            System.out.println("El precio no debe contener caracteres alfabeticos");
             return false;
         }
-        return !(precio < 0);
+        if(precioS.contains(".")) {
+            int dotIndex = precioS.indexOf(".");
+            if((length-(dotIndex+1))<=2){
+                return !(precio < 0);
+            }else{
+                return false;
+            }
+        }else{
+            return !(precio < 0);
+        }
     }
 
     private void desarrollarOpcionesAsistente(){
@@ -146,6 +162,7 @@ public class Menu {
         switch (eleccion) {
             case 0:
                 System.out.println("\n¡Muchas gracias por usar este programa!");
+                createDividers();
                 System.exit(0);
             case 1:
                 Cita temp1 = new Cita();
@@ -174,10 +191,15 @@ public class Menu {
                 break;
         }
     }
+    public void createDividers(){
+        System.out.println("////////////////////////////////////////////////////////");
+        System.out.println("////////////////////////////////////////////////////////");
+    }
 
     @Override
     public String toString() {
-        System.out.println("\tMenú Principal");
+        createDividers();
+        System.out.println("\t\t\t\t\tMenú Principal\n");
         for(String opcion: opciones){
             System.out.println(opcion);
         }

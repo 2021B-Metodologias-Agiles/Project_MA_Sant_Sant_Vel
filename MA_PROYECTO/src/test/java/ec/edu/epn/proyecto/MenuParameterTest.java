@@ -16,11 +16,15 @@ public class MenuParameterTest {
     @Parameterized.Parameters
     public static Iterable<Object[]>parameters(){
         List<Object[]> objects = new ArrayList<Object[]>();
-        objects.add(new Object[]{ new String[]{"Cepillo","ABC","10.99"}});
-        objects.add(new Object[]{new String[]{"Cepillo","ABC","199.45"}});
-        objects.add(new Object[]{new String[]{"Cepillo","ABC","1.93"}});
-        objects.add(new Object[]{new String[]{"Cepillo","ABC","1000.339"}});
-        objects.add(new Object[]{new String[]{"Cepillo","ABC","10.999"}});
+        objects.add(new Object[]{ new String[]{"Cepillo","ABC3","10"}});
+        objects.add(new Object[]{new String[]{"Cepillo","ABC2","199.4"}});
+        objects.add(new Object[]{new String[]{"Cepillo","ABC4","1.93"}});
+        objects.add(new Object[]{new String[]{"Cepillo","ABC5","1000.339"}});
+        objects.add(new Object[]{new String[]{"Cepillo","ABC6","10.999"}});
+        objects.add(new Object[]{ new String[]{"Cepillo","ABC7","124"}});
+        objects.add(new Object[]{new String[]{"Cepillo","ABC8","199."}});
+        objects.add(new Object[]{new String[]{"Cepillo","ABC9","1.93"}});
+        objects.add(new Object[]{new String[]{"Cepillo","ABC7","1000.4522"}});
         return objects;
     }
 
