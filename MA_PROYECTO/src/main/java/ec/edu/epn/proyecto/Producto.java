@@ -17,21 +17,23 @@ public class Producto {
     public static ArrayList<Producto> crear(ArrayList<Producto> productos, Producto producto){
         boolean esProductoExistente = false;
         if(productos.isEmpty()){
-            productos.add(producto);
-            System.out.println("Producto creado");
-            System.out.println(producto.toString());
+            añadirProducto(productos, producto);
         }else{
             if(validarProductoExistente(productos, producto)){
                 System.out.println("Ya existe un producto con este nombre");
                 esProductoExistente = true;
             }
             if(!esProductoExistente){
-                productos.add(producto);
-                System.out.println("Producto creado");
-                System.out.println(producto.toString());
+                añadirProducto(productos, producto);
             }
         }
         return productos;
+    }
+
+    private static void añadirProducto(ArrayList<Producto> productos, Producto producto) {
+        productos.add(producto);
+        System.out.println("Producto creado");
+        System.out.println(producto.toString());
     }
 
     public static boolean validarProductoExistente(ArrayList<Producto> productos, Producto producto){

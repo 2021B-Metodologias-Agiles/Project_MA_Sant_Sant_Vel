@@ -96,8 +96,7 @@ public class Menu {
                 String[] datos = obtenerDatos();
                 if(this.revisarPrecio(datos)) {
                     Producto nProducto = this.obtenerProducto(datos);
-                    ArrayList<Producto> newProducts = Producto.crear(productos, nProducto);
-                    productos = newProducts;
+                    productos = Producto.crear(productos, nProducto);
                 }else{
                     System.out.println("El precio ingresado tiene errores.");
                     System.out.println("Producto no creado.");
@@ -127,7 +126,7 @@ public class Menu {
         String detalle = datos[1];
         double precio = Double.parseDouble(datos[2]);
         String nombre = tipo + " " + detalle;
-        System.out.println(nombre);
+        //System.out.println(nombre);
         return new Producto(nombre,precio);
     }
 
@@ -145,9 +144,13 @@ public class Menu {
             System.out.println("El precio no debe contener caracteres alfabeticos");
             return false;
         }
+        return validarPrecio(precioS, length, precio);
+    }
+
+    private boolean validarPrecio(String precioS, int length, double precio) {
         if(precioS.contains(".")) {
             int dotIndex = precioS.indexOf(".");
-            if((length-(dotIndex+1))<=2){
+            if((length -(dotIndex+1))<=2){
                 return !(precio < 0);
             }else{
                 return false;

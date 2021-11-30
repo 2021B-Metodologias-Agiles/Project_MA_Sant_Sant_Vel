@@ -130,43 +130,53 @@ public class Cita {
             }
         }
         if (existencia == EstadoFecha.FECHA_OCUPADA.ordinal()) {
-            while(true){
-                String nuevaFecha;
-                while(true) {
-                    Scanner inputNuevaFecha = new Scanner(System.in);
-                    System.out.print("Ingrese nueva fecha y hora (dd/MM/yyyy hh:mm): ");
-                    nuevaFecha = inputNuevaFecha.nextLine();
-                    if(validarFechaCompleta(nuevaFecha)){
-                        break;
-                    }
-                    System.out.println("\nFecha inválida");
-                }
-                String numCedula = citas.get(citaElegida).getNumCedula();
-                citaTemp.setFechaCompleta(nuevaFecha);
-                citaTemp.setNumCedula(numCedula);
-                for (Cita cita : citas) {
-                    if (cita.getFechaCompleta().equals(nuevaFecha)) {
-                        disponibilidad = EstadoFecha.FECHA_OCUPADA.ordinal();
-                        break;
-                    } else {
-                        disponibilidad = EstadoFecha.FECHA_LIBRE.ordinal();
-                    }
-                }
-                if (disponibilidad == EstadoFecha.FECHA_LIBRE.ordinal()) {
-                    citas.remove(citaElegida);
-                    citas.add(citaTemp);
-                    System.out.println("\nCita actualizada\n");
-                    break;
-                } else if (disponibilidad == EstadoFecha.FECHA_OCUPADA.ordinal()) {
-                    System.out.println("\nFecha no disponible\n");
-                }
-            }
+            setFechaActualizada(citas, disponibilidad, citaTemp, citaElegida);
         }else if (existencia == EstadoFecha.FECHA_LIBRE.ordinal()){
             System.out.println("\nNo existen citas en esa fecha y hora\n");
             actualizar(citas);
         }
 
         return citas;
+    }
+
+    private void setFechaActualizada(ArrayList<Cita> citas, int disponibilidad, Cita citaTemp, int citaElegida) {
+        while(true) {
+            String nuevaFecha;
+            nuevaFecha = getNuevaFechaCorrecta();
+            String numCedula = citas.get(citaElegida).getNumCedula();
+            citaTemp.setFechaCompleta(nuevaFecha);
+            citaTemp.setNumCedula(numCedula);
+            for (Cita cita : citas) {
+                if (cita.getFechaCompleta().equals(nuevaFecha)) {
+                    disponibilidad = EstadoFecha.FECHA_OCUPADA.ordinal();
+                    break;
+                } else {
+                    disponibilidad = EstadoFecha.FECHA_LIBRE.ordinal();
+                }
+            }
+            if (disponibilidad == EstadoFecha.FECHA_LIBRE.ordinal()) {
+                citas.remove(citaElegida);
+                citas.add(citaTemp);
+                System.out.println("\nCita actualizada\n");
+                break;
+            } else if (disponibilidad == EstadoFecha.FECHA_OCUPADA.ordinal()) {
+                System.out.println("\nFecha no disponible\n");
+            }
+        }
+    }
+
+    private String getNuevaFechaCorrecta() {
+        String nuevaFecha;
+        while(true) {
+            Scanner inputNuevaFecha = new Scanner(System.in);
+            System.out.print("Ingrese nueva fecha y hora (dd/MM/yyyy hh:mm): ");
+            nuevaFecha = inputNuevaFecha.nextLine();
+            if(validarFechaCompleta(nuevaFecha)){
+                break;
+            }
+            System.out.println("\nFecha inválida");
+        }
+        return nuevaFecha;
     }
 
     public boolean validarFechaCompleta(String fecha){
